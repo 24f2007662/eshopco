@@ -17,9 +17,12 @@ app.add_middleware(
 )
 
 
-with open("q-vercel-latency.json", "r") as f:
-    telemetry = json.load(f)
+from pathlib import Path
 
+DATA_FILE = Path(__file__).resolve().parent / "q-vercel-latency.json"
+
+with DATA_FILE.open("r", encoding="utf-8") as f:
+    telemetry = json.load(f)
 
 class LatencyRequest(BaseModel):
     regions: list[str]
